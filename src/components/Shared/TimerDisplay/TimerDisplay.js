@@ -12,7 +12,6 @@ export const TimerDisplay = (props) => {
         }, 1000);
         return () => {
             clearInterval(interval.current);
-            console.log('Hello World!');
         }
     }, [])
 
