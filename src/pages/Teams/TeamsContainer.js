@@ -7,8 +7,8 @@ import { DisplayInfiniteTeams } from '../../components/Teams/DisplayInfiniteTeam
 import { TimerDisplay } from '../../components/Shared/TimerDisplay/TimerDisplay';
 
 export const TeamsContainer = () => {
-    const [firstIndex, setFirstIndex] = useState(10);
-    const [secondIndex, setSecondIndex] = useState(2);
+    const [firstIndex, setFirstIndex] = useState(4);
+    const [secondIndex, setSecondIndex] = useState(19);
     const [inSearchProcess, setInSearchProcess] = useState(false);
     const [isShowBackdrop, setIsShowBackdrop] = useState(true);
 
@@ -24,17 +24,17 @@ export const TeamsContainer = () => {
 
     const startGame = () => {
         setIsShowBackdrop(false);
-        setInSearchProcess(true);
-        interval.current = setInterval(() => {
-            setFirstIndex(Math.floor(Math.random() * teams.length))
-            setSecondIndex(Math.floor(Math.random() * teams.length))
-        }, 100);
+        // setInSearchProcess(true);
+        // interval.current = setInterval(() => {
+        //     setFirstIndex(Math.floor(Math.random() * teams.length))
+        //     setSecondIndex(Math.floor(Math.random() * teams.length))
+        // }, 100);
 
-        timeout.current = setTimeout(() => {
-            clearInterval(interval.current);
-            clearTimeout(timeout.current);
-            setInSearchProcess(false);
-        }, 4500);
+        // timeout.current = setTimeout(() => {
+        //     clearInterval(interval.current);
+        //     clearTimeout(timeout.current);
+        //     setInSearchProcess(false);
+        // }, 4500);
     }
 
     return (
