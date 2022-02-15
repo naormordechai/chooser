@@ -28,7 +28,7 @@ export const TeamsContainer = () => {
         interval.current = setInterval(() => {
             setFirstIndex(Math.floor(Math.random() * teams.length))
             setSecondIndex(Math.floor(Math.random() * teams.length))
-        }, 20);
+        }, 100);
 
         timeout.current = setTimeout(() => {
             clearInterval(interval.current);
