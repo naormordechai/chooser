@@ -1,0 +1,31 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 85% 15%;
+  height: calc(100vh - 72px);
+  justify-items: center;
+  gap: 24px;
+  .btn {
+    background-color: #126e51;
+    color: #fff;
+    width: 100%;
+    max-width: 400px;
+    max-height: 48px;
+    grid-column: 1 / -1;
+    &:hover {
+      background-color: #168361;
+    }
+  }
+}
+
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(204, 204, 204, 0.5);
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

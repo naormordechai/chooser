@@ -1,0 +1,11 @@
+.app {
+  height: 100vh;
+  background-color: #383838;
+  color: #fff;
+  &__content {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: calc(100% - 72px);
+    padding: 0 24px;
+  }
+}

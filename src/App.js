@@ -1,13 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import { DisplayInfiniteTeams } from './components/DisplayInfiniteTeams/DisplayInfiniteTeams';
-import teams from './resources/teams.json';
+import styles from './App.module.scss';
+import { Header } from './components/Layout/Header/Header';
+import { TeamsContainer } from './pages/Teams/TeamsContainer';
 
 
 function App() {
   return (
-    <div>
-      <DisplayInfiniteTeams teams={teams} />
+    <div className={styles.app}>
+      <Header />
+      <div className={styles.app__content}>
+        <TeamsContainer />
+      </div>
     </div>
   );
 }
