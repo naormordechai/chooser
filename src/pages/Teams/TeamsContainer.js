@@ -34,7 +34,7 @@ export const TeamsContainer = () => {
             clearInterval(interval.current);
             clearTimeout(timeout.current);
             setInSearchProcess(false);
-        }, 4500);
+        }, 4000);
     }
 
     return (
