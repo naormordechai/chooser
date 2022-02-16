@@ -22,19 +22,35 @@ export const TeamsContainer = () => {
         }
     }, [])
 
-    const startGame = () => {
-        setIsShowBackdrop(false);
-        setInSearchProcess(true);
+    useEffect(() => {
+        if (!inSearchProcess && firstIndex === secondIndex) {
+            startGame(20, 500);
+        }
+    }, [inSearchProcess])
+
+
+    const startInterval = (intervalTime = 20) => {
         interval.current = setInterval(() => {
             setFirstIndex(Math.floor(Math.random() * teams.length))
             setSecondIndex(Math.floor(Math.random() * teams.length))
-        }, 20);
+        }, intervalTime);
+    }
+
+    const clearIntervalsAndTimeouts = () => {
+        clearInterval(interval.current);
+        clearTimeout(timeout.current);
+    }
+
+    const startGame = (intervalTime = 20, timeoutTime = 4000) => {
+        clearIntervalsAndTimeouts();
+        setIsShowBackdrop(false);
+        setInSearchProcess(true);
+        startInterval(intervalTime);
 
         timeout.current = setTimeout(() => {
-            clearInterval(interval.current);
-            clearTimeout(timeout.current);
+            clearIntervalsAndTimeouts();
             setInSearchProcess(false);
-        }, 4000);
+        }, timeoutTime);
     }
 
     return (
