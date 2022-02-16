@@ -1,6 +1,6 @@
 {
-  "short_name": "Chooser",
-  "name": "Chooser",
+  "short_name": "CHOOSER",
+  "name": "CHOOSER",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#126e51",
+  "background_color": "#383838"
 }
