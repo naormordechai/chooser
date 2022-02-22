@@ -1,8 +1,17 @@
 .container {
   &__appBar {
+    background-color: #168361 !important;
     margin-bottom: 30px;
   }
   &__form {
     padding: 0 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    &__titleSection {
+      font-size: 14px;
+      margin-bottom: 18px;
+      opacity: 0.8;
+      text-decoration: underline;
+    }
   }
 }

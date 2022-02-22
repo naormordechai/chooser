@@ -2,10 +2,16 @@ import React, { createContext, useReducer, } from 'react';
 import teamsJson from '../resources/teams.json';
 import StorageService from '../services/StorageService';
 
+const getRequestedTeams = () => {
+    const settings = StorageService.load('settings');
+    const rate = settings?.rate || 'mixed';
+    return rate === 'mixed' ? teamsJson : teamsJson.filter(team => team.rate === rate);
+}
+
 const initialState = {
-    teams: teamsJson,
+    teams: getRequestedTeams(),
     settings: StorageService.load('settings') ?? {},
-    firstIndex: 3,
+    firstIndex: 0,
     seconedIndex: 1
 };
 
@@ -19,12 +25,12 @@ const reducer = (state, action) => {
                 teams: action.payload.rate === 'mixed' ? teamsJson : teamsJson.filter(team => team.rate === action.payload.rate),
                 settings: {
                     ...state.settings,
-                    rate: action.payload.rate,
-                    isIncludedLastTeams: action.payload.isIncludedLastTeams
-                }
+                    ...action.payload,
+                },
+                firstIndex: 0,
+                seconedIndex: 1
             }
         case 'changeIndexes':
-            console.log(action.payload);
             return {
                 ...state,
                 firstIndex: action.payload.firstIndex,

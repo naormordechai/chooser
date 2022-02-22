@@ -4,8 +4,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
@@ -19,12 +17,11 @@ import styles from './Settings.module.scss';
 export const Settings = (props) => {
     const appState = useContext(AppContext);
     const [rate, setRate] = useState(StorageService.load('settings')?.rate || 'mixed');
-    const [isIncludedLastTeams, setIsIncludedLastTeams] = useState(StorageService.load('settings')?.isIncludedLastTeams || true);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        localStorage.setItem('settings', JSON.stringify({ rate, isIncludedLastTeams }));
-        appState.dispatch({ type: 'changeSettings', payload: { rate, isIncludedLastTeams } });
+        StorageService.store('settings', { rate })
+        appState.dispatch({ type: 'changeSettings', payload: { rate } });
         props.closeModal();
     }
     return (
@@ -47,27 +44,32 @@ export const Settings = (props) => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <form onSubmit={handleSubmit} className={styles.container__form}>
-                <FormControl fullWidth size="small">
-                    <InputLabel id="rate">Rate</InputLabel>
-                    <Select
-                        labelId="rate"
-                        value={rate}
-                        label="Rate"
-                        onChange={(event) => setRate(event.target.value)}
-                    >
-                        <MenuItem value={5}>
-                            {Array.from({ length: 5 }).map((_, index) => (
-                                < StarRateIcon key={index} classes={{ root: 'c-gold' }} />
-                            ))}
-                        </MenuItem>
-                        <MenuItem value="mixed">Mixed</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControlLabel
+            <div className={styles.container__form}>
+                <Typography classes={{ root: styles.container__form__titleSection }} variant="span" component="div">
+                    Teams
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <FormControl fullWidth size="small">
+                        <InputLabel id="rate">Rate</InputLabel>
+                        <Select
+                            labelId="rate"
+                            value={rate}
+                            label="Rate"
+                            onChange={(event) => setRate(event.target.value)}
+                        >
+                            <MenuItem value={5}>
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    < StarRateIcon key={index} classes={{ root: 'c-gold' }} />
+                                ))}
+                            </MenuItem>
+                            <MenuItem value="mixed">Mixed</MenuItem>
+                        </Select>
+                    </FormControl>
+                    {/* <FormControlLabel
                     control={<Checkbox defaultChecked value={isIncludedLastTeams} />}
-                    label={<Typography classes={{ root: 'bold fs-12' }}>Included teams from last lottery</Typography>} />
-            </form>
+                    label={<Typography classes={{ root: 'bold fs-12' }}>Included teams from last lottery</Typography>} /> */}
+                </form>
+            </div>
         </div>
     )
 }
