@@ -2,9 +2,13 @@
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
   background-color: #126e51;
   color: #fff;
 
   margin-bottom: 24px;
+  button {
+    color: #fff;
+  }
 }

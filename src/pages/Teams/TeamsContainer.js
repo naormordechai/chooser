@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import styles from './TeamsContainer.module.scss';
-import teams from '../../resources/teams.json';
+import teamsJson from '../../resources/teams.json';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
 import { DisplayInfiniteTeams } from '../../components/Teams/DisplayInfiniteTeams/DisplayInfiniteTeams';
 import { TimerDisplay } from '../../components/Shared/TimerDisplay/TimerDisplay';
+import { AppContext } from '../../context/AppContext';
 
 export const TeamsContainer = () => {
-    const [firstIndex, setFirstIndex] = useState(3);
-    const [secondIndex, setSecondIndex] = useState(19);
+    const { state, dispatch } = useContext(AppContext);
+    console.log(state);
     const [inSearchProcess, setInSearchProcess] = useState(false);
     const [isShowBackdrop, setIsShowBackdrop] = useState(true);
 
@@ -23,7 +24,7 @@ export const TeamsContainer = () => {
     }, [])
 
     useEffect(() => {
-        if (!inSearchProcess && firstIndex === secondIndex) {
+        if (!inSearchProcess && state.firstIndex === state.secondIndex) {
             startGame(20, 500);
         }
     }, [inSearchProcess])
@@ -31,8 +32,7 @@ export const TeamsContainer = () => {
 
     const startInterval = (intervalTime = 20) => {
         interval.current = setInterval(() => {
-            setFirstIndex(Math.floor(Math.random() * teams.length))
-            setSecondIndex(Math.floor(Math.random() * teams.length))
+            dispatch({ type: 'changeIndexes', payload: { firstIndex: Math.floor(Math.random() * state.teams.length), seconedIndex: Math.floor(Math.random() * state.teams.length) } })
         }, intervalTime);
     }
 
@@ -55,14 +55,14 @@ export const TeamsContainer = () => {
 
     return (
         <div className={styles.container}>
-            {isShowBackdrop && <Backdrop
+            {/* {isShowBackdrop && <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={true}
             >
                 <TimerDisplay onTimerFinish={startGame} />
-            </Backdrop>}
-            <DisplayInfiniteTeams teams={teams} index={firstIndex} title="(Home)" />
-            <DisplayInfiniteTeams teams={teams} index={secondIndex} title="(Away)" />
+            </Backdrop>} */}
+            <DisplayInfiniteTeams teams={state.teams} index={state.firstIndex} title="(Home)" />
+            <DisplayInfiniteTeams teams={state.teams} index={state.seconedIndex} title="(Away)" />
             {!inSearchProcess && <Button classes={{ root: styles.btn }} onClick={startGame}>PLAY</Button>}
         </div>
     )

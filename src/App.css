@@ -11,3 +11,17 @@
 body {
   font-size: 18px;
 }
+.pt-10 {
+  padding-top: 10px !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.c-gold {
+  color: gold;
+}
