@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 80% 20%;
-  height: calc(100vh - 72px);
+  height: 100%;
   justify-items: center;
   gap: 24px;
   .btn {

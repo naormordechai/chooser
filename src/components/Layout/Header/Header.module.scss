@@ -1,10 +1,29 @@
+.appBar {
+  margin-bottom: 30px;
+  background-color: #168361 !important;
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      letter-spacing: 2.5px !important;
+    }
+    &__btn {
+      color: #fff !important;
+    }
+  }
+}
+
 .header {
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
   background-color: #126e51;
   color: #fff;
 
   margin-bottom: 24px;
+  button {
+    color: #fff;
+  }
 }
